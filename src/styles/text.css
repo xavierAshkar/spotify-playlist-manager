@@ -1,3 +1,4 @@
+/* src/styles/text.css */
 @layer components {
   .text-main {
     @apply text-textMain font-regular text-small;

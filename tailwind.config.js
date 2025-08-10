@@ -12,7 +12,7 @@ export default {
         hoverBg: "#242428",
         accent: "#1CD760",
         textMain: "#F2F2F2",
-        textMuted: "#B2B2B2",
+        textSubtle: "#B2B2B2",
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'], 
