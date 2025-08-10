@@ -1,0 +1,26 @@
+@layer components {
+  .text-main {
+    @apply text-textMain font-regular text-small;
+  }
+
+  .text-subtle {
+    @apply text-textSubtle font-light text-small;
+  }
+
+  .text-main-big {
+    @apply text-textMain font-regular text-large;
+  }
+
+  .text-subtle-big {
+    @apply text-textSubtle font-light text-large;
+  }
+
+  .text-heading {
+    @apply text-textSubtle font-semibold text-large;
+  }
+
+  .text-heading-hover {
+    @apply text-textMain font-bold text-large;
+  }
+
+}

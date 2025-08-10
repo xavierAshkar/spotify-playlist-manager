@@ -2,7 +2,7 @@
 export default function Layout({ headerLeft, headerCenter, headerRight, footerLeft, footerCenter, footerRight, children }) {
   return (
     <div
-      className="h-screen flex flex-col bg-[#0f0f12] text-white"
+      className="h-screen flex flex-col bg-darkBg text-white"
       style={{
         // tokens 
         '--header-h': '72px',
