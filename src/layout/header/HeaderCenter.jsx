@@ -35,7 +35,7 @@ export default function HeaderCenter({
   return (
     <div className="h-full w-full px-4 flex items-center gap-[12px] justify-center">
       {/* Search pill (w=460, h=46 pre-hover) */}
-      <div className="group w-[600px]">
+      <div className="group w-full max-w-[600px] min-w-0">
         <div
           className="
             h-[46px] w-full px-[14px]
