@@ -3,6 +3,19 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getJSON } from "@/lib/api";
 import { formatDurationMs } from "@/lib/time";
+import SongList from "@/components/songs/SongList";
+
+function toSongRowData(track) {
+  if (!track) return null;
+  const art = track.album?.images?.[2]?.url || track.album?.images?.[0]?.url;
+  return {
+    id: track.id,
+    title: track.name,
+    artistsText: (track.artists || []).map(a => a.name).join(", "),
+    coverUrl: art,
+    durationMs: track.duration_ms,
+  };
+}
 
 export default function PlaylistDetailsMain() {
   const { id } = useParams();
@@ -31,6 +44,9 @@ export default function PlaylistDetailsMain() {
   const items = pl.tracks?.items ?? [];
   const totalMs = items.reduce((sum, it) => sum + (it?.track?.duration_ms || 0), 0);
 
+  // normalize to SongList shape
+  const songs = items.map(it => toSongRowData(it.track)).filter(Boolean);
+
   return (
     <div className="h-full overflow-auto p-6">
       <button className="text-subtle mb-4 hover:underline" onClick={() => navigate(-1)}>
@@ -48,25 +64,12 @@ export default function PlaylistDetailsMain() {
         </div>
       </div>
 
-      <ul className="space-y-2">
-        {items.map((it, i) => {
-          const t = it.track || {};
-          const art = t.album?.images?.[2]?.url || t.album?.images?.[0]?.url;
-          const artists = (t.artists || []).map(a => a.name).join(", ");
-          return (
-            <li key={t.id ?? i} className="p-3 rounded-lg bg-cardBg hover:bg-hoverBg transition-colors">
-              <div className="flex items-center gap-3">
-                {art && <img src={art} alt="" className="w-12 h-12 rounded object-cover" />}
-                <div className="min-w-0 flex-1">
-                  <div className="text-main truncate">{t.name}</div>
-                  <div className="text-subtle text-sm truncate">{artists}</div>
-                </div>
-                <div className="text-subtle text-sm">{formatDurationMs(t.duration_ms || 0)}</div>
-              </div>
-            </li>
-          );
-        })}
-      </ul>
+      {/* shared list renderer */}
+      <SongList
+        songs={songs}
+        variant="playlist"         // shows duration when provided
+        className="space-y-2"
+      />
     </div>
   );
 }

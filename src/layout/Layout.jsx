@@ -27,7 +27,7 @@ export default function Layout({
       {/* Body */}
       <div className="flex-1 min-h-0 grid grid-cols-[var(--left-w)_1fr_var(--right-w)] overflow-hidden">
         <aside className="min-h-0 overflow-y-auto custom-scrollbar border-r border-lightBg">{left}</aside>
-        <main className="min-w-0 min-h-0 overflow-y-auto custom-scrollbar">
+        <main className="min-w-0 min-h-0 overflow-y-auto scrollbar scrollbar-hover">
           {main}
         </main>
         <aside className="min-h-0 overflow-y-auto custom-scrollbar border-l border-lightBg">{right}</aside>
