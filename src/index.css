@@ -37,3 +37,66 @@
   .custom-scrollbar::-webkit-scrollbar-thumb { background: #505050; border-radius: 8px; }
   .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
 }
+/* Shared base: same gutter size everywhere */
+.scrollbar {
+    --sb-size: 8px;                               /* set the size once */
+    scrollbar-width: thin;                        /* Firefox keyword */
+    scrollbar-color: rgba(255,255,255,.25) transparent;
+  }
+  .scrollbar::-webkit-scrollbar {
+    width: var(--sb-size);
+    height: var(--sb-size);
+  }
+  .scrollbar::-webkit-scrollbar-track { background: transparent; }
+  .scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(255,255,255,.25);
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255,255,255,.4);
+  }
+  .scrollbar::-webkit-scrollbar-corner { background: transparent; }  
+
+/* Hover-reveal WITHOUT layout shift (keeps the gutter reserved) */
+.scrollbar-hover {
+    /* Firefox: always reserve thin gutter, but make thumb transparent by default */
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+  }
+  
+  /* On hover, reveal thumb color (track stays transparent) */
+  .scrollbar-hover:hover {
+    scrollbar-color: rgba(255,255,255,.25) transparent;
+  }
+  
+  /* WebKit: always keep an 8px scrollbar box so content doesn't shift */
+  .scrollbar-hover::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  /* Thumb hidden by default (transparent) */
+  .scrollbar-hover::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  
+  /* Reveal thumb on hover */
+  .scrollbar-hover:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(255,255,255,.25);
+  }
+  
+  /* Slightly stronger on thumb hover */
+  .scrollbar-hover:hover::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255,255,255,.4);
+  }
+  
+  /* Keep the corner transparent (kills the white square) */
+  .scrollbar-hover::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+  

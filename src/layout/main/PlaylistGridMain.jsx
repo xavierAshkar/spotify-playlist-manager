@@ -18,7 +18,7 @@ export default function PlaylistGridMain() {
   const [me, setMe] = useState(null);
   const [playlists, setPlaylists] = useState(null);
   const [err, setErr] = useState("");
-  const ran = useRef(false);           // avoid double-run in React StrictMode
+  const ran = useRef(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -74,7 +74,10 @@ export default function PlaylistGridMain() {
             </div>
             <div className="text-main">{pl.name}</div>
             <div className="text-subtle text-xs">
-              {pl.tracks_total} songs • {formatDurationMs(pl.total_duration_ms)}
+              {pl.tracks_total} songs
+              {pl.total_duration_ms != null && (
+                <> • {formatDurationMs(pl.total_duration_ms)}</>
+              )}
             </div>
           </button>
         ))}
